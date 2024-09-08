@@ -9,6 +9,9 @@ scope = ['https://www.googleapis.com/auth/spreadsheets', "https://www.googleapis
 creds = ServiceAccountCredentials.from_json_keyfile_name('creds.json',scope)
 client = gspread.authorize(creds)
 sheet = client.open('StockSheet').sheet1
+# Enter API Key
+API-key = None 
+API-token = None
 
 #Creating companies with tickers and cell locations
 class Company():
@@ -31,9 +34,9 @@ companies = [apple,microsoft,nvidia,airbnb,intuit]
 
 #Close Price Function - uses 2 APIs because first one doesn't work sometimes
 def find_close(stock, date):
-    response = requests.get(f'https://api.polygon.io/v1/open-close/{stock}/{date}?adjusted=true&apiKey=ajgfYm0WoHkAJdbKFOeaZ9p_VDuWtMKp').json()
+    response = requests.get(f'https://api.polygon.io/v1/open-close/{stock}/{date}?adjusted=true&apiKey={API-key}').json()
     if response['status'] == "NOT_FOUND":
-        response = requests.get(f'https://api.stockdata.org/v1/data/eod?symbols={stock}&date={date}&sort=True&api_token=6cXsTiEjHY7cB46slYlPoyt4SbYIYv6rbjGuu2Fu').json()
+        response = requests.get(f'https://api.stockdata.org/v1/data/eod?symbols={stock}&date={date}&sort=True&api_token={API-token}').json()
         return str(response['data'][0]['close'])
     else:
         return str(response['close'])
