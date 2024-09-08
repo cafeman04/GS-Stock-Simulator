@@ -20,7 +20,7 @@ shares = 5
 
 
 def find_close(stock, date):
-    response = requests.get(f'https://api.polygon.io/v1/open-close/{stock}/{date}?adjusted=true&apiKey=ajgfYm0WoHkAJdbKFOeaZ9p_VDuWtMKp').json()
+    response = requests.get(f'https://api.polygon.io/v1/open-close/{stock}/{date}?adjusted=true&apiKey={API-key}').json()
     return response['close']
 
 class Company():
